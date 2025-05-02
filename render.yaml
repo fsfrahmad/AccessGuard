@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: accessguard-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://saadislion:krE4oIA2Ht9cFSDI@authcluster.ujfzwo4.mongodb.net/AccessGuard?retryWrites=true&w=majority
+      - key: MAIL_USERNAME
+        value: saadislion@gmail.com
+      - key: MAIL_PASSWORD
+        value: mevsfyronisiezlp

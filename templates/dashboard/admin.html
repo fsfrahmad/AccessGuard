@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Welcome, Admin!</h1>
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header>
+    <div class="dashboard-content">
+      <div class="card">
+        <h3>Admin Controls</h3>
+        <p>Manage users, view analytics, and configure settings.</p>
+        <button class="action-btn">Manage Users</button>
+      </div>
+      <div class="card">
+        <h3>System Overview</h3>
+        <p>Monitor system performance and user activity.</p>
+        <button class="action-btn">View Reports</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
