@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Forgot Password</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://kit.fontawesome.com/8d19e07a39.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="container">
@@ -18,6 +19,7 @@
       {% endwith %}
       <div class="input-box">
         <input type="email" required name="email">
+        <i class="fas fa-envelope input-icon"></i>
         <label>Email</label>
       </div>
       <button type="submit" class="btn">Send OTP</button>
