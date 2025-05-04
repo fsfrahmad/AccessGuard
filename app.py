@@ -156,17 +156,11 @@ def signup():
             flash("Passwords do not match. Please try again.", "error")
             return render_template('signup.html', form_data=form_data)
 
-        role = form_data['role'].lower()
-        # Validate role
-        if role not in ['user', 'admin']:
-            flash("Invalid role selected. Please choose either user or admin.", "error")
-            return render_template('signup.html', form_data=form_data)
-
         user = {
             'username': username,
             'email': email,
             'password': generate_password_hash(password),
-            'role': role,
+            'role': 'user',
             'verified': False,
             'otp': ''.join(random.choices(string.digits, k=6))
         }
