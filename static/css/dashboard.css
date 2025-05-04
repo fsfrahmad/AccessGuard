@@ -1,0 +1,115 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background: #f5f7fa;
+    color: #333;
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .navbar-left {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6b7280;
+  }
+  
+  .navbar-left i {
+    margin-right: 8px;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-item {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-item.active {
+    color: #8b5cf6;
+    background: #f3e8ff;
+  }
+  
+  .nav-item:hover {
+    color: #6b7280;
+    background: #f3f4f6;
+  }
+  
+  .dashboard-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-container h1 {
+    font-size: 24px;
+    color: #1f2937;
+    margin-bottom: 15px;
+  }
+  
+  .dashboard-container p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-container li {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 5px;
+  }
+  
+  .dashboard-container li strong {
+    color: #1f2937;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      margin: 10px;
+      padding: 15px;
+    }
+  
+    .navbar-menu {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+  }

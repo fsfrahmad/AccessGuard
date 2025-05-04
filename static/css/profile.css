@@ -1,0 +1,239 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #1e1e2f, #2c2c3e);
+    min-height: 100vh;
+    color: #e0e0e0;
+    overflow-x: hidden;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #2c2c3e, #3a3a54);
+    color: #e0e0e0;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar:hover {
+    background: linear-gradient(90deg, #25253a, #33334d);
+  }
+  
+  .navbar-left {
+    font-size: 20px;
+    font-weight: 600;
+    color: #00ffcc;
+    text-shadow: 1px 1px 4px rgba(0, 255, 204, 0.3);
+  }
+  
+  .navbar-left i {
+    margin-right: 8px;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-item {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .nav-item.active,
+  .nav-item:hover {
+    color: #00ffcc;
+    background-color: rgba(0, 255, 204, 0.1);
+    text-shadow: 0 0 6px #00ffcc;
+  }
+  
+  .nav-item i {
+    font-size: 16px;
+  }
+  
+  .profile-container {
+    margin-top: 80px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #2c2c3e;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .profile-header {
+    background: #3a3a54;
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid #44445a;
+  }
+  
+  .profile-header h2 {
+    font-size: 24px;
+    color: #00ffcc;
+  }
+  
+  .profile-header h2 i {
+    margin-right: 8px;
+  }
+  
+  .profile-content {
+    padding: 20px;
+  }
+  
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .profile-info p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .profile-info strong {
+    color: #00ffcc;
+    width: 100px;
+  }
+  
+  .profile-info i {
+    color: #00ffcc;
+    font-size: 18px;
+  }
+  
+  .action-button {
+    background: #00ffcc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #1e1e2f;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .action-button:hover {
+    background: #00cc99;
+    transform: scale(1.05);
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #00ffcc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .form-group label i {
+    font-size: 16px;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #44445a;
+    color: #e0e0e0;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    background: #55556a;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .save-button {
+    background: #00ffcc;
+  }
+  
+  .save-button:hover {
+    background: #00cc99;
+  }
+  
+  .cancel-button {
+    background: #ff5555;
+  }
+  
+  .cancel-button:hover {
+    background: #cc4444;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    .navbar-menu {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .profile-container {
+      margin-top: 100px;
+      width: 90%;
+    }
+  
+    .profile-info p {
+      font-size: 14px;
+    }
+  
+    .action-button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }

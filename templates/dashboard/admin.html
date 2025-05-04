@@ -1,28 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span>Hello {{ session['username'] }} ({{ session['role'] }})</span>
+    </div>
+    <div class="navbar-menu">
+      <a href="{{ url_for('dashboard') }}" class="nav-item">Home</a>
+      <a href="{{ url_for('secure_chat') }}" class="nav-item">SecureChat</a>
+      <a href="{{ url_for('messages') }}" class="nav-item">Messages</a>
+      <a href="{{ url_for('users') }}" class="nav-item">Users</a>
+      <a href="{{ url_for('profile') }}" class="nav-item">Profile</a>
+      <a href="{{ url_for('logout') }}" class="nav-item">Logout</a>
+    </div>
+  </nav>
+
   <div class="dashboard-container">
-    <header class="dashboard-header">
-      <h1>Welcome, Admin!</h1>
-      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-    </header>
+    <div class="dashboard-header">
+      <h1>Admin Panel</h1>
+    </div>
     <div class="dashboard-content">
       <div class="card">
-        <h3>Admin Controls</h3>
-        <p>Manage users, view analytics, and configure settings.</p>
-        <button class="action-btn">Manage Users</button>
+        <h2>🔐 Secure Chat – Your Gateway to Cyber Intelligence</h2>
+        <p>Secure Chat is a dedicated, real-time communication platform for enthusiasts, professionals, and learners in the fields of Information Security, Computer Networking, and Ethical Hacking. Whether you're a cybersecurity analyst, a penetration tester, a student, or a hobbyist, Secure Chat connects you with a thriving community where knowledge is shared, skills are sharpened, and security awareness is elevated.</p>
       </div>
+
       <div class="card">
-        <h3>System Overview</h3>
-        <p>Monitor system performance and user activity.</p>
-        <button class="action-btn">View Reports</button>
+        <h3>💡 Key Features</h3>
+        <div class="feature-section">
+          <h4>🧠 Information Security (Infosec)</h4>
+          <ul>
+            <li>Daily Security Briefings: Get updates on the latest vulnerabilities, threat actors, data breaches, and zero-day exploits.</li>
+            <li>Discussion Rooms: Join topic-specific rooms (e.g., malware analysis, digital forensics, cryptography, and SOC operations).</li>
+            <li>Resources: Access curated content including whitepapers, security tools, courses, and CTF challenges.</li>
+          </ul>
+        </div>
+        <div class="feature-section">
+          <h4>🌐 Networking</h4>
+          <ul>
+            <li>Tech Talk Channels: Learn and discuss networking protocols, OSI layers, firewalls, VPNs, and packet analysis.</li>
+            <li>Live Labs: Collaborate with others in simulated environments to practice network setup, traffic sniffing, and troubleshooting.</li>
+            <li>Wireshark & Packet Sniffing Threads: Share and analyze packet captures together.</li>
+          </ul>
+        </div>
+        <div class="feature-section">
+          <h4>🧑‍💻 Ethical Hacking & Penetration Testing</h4>
+          <ul>
+            <li>Red Team Ops: Dive into exploitation techniques, post-exploitation tools, and attack simulations.</li>
+            <li>Bug Bounty & Recon Channels: Share scope-based targets, recon methods, and responsible disclosure reports.</li>
+            <li>Tool Exchange: Discover, share, and test tools like Nmap, Metasploit, Burp Suite, and custom scripts.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛡️ Security First</h3>
+        <p>Secure Chat is end-to-end encrypted with built-in zero-logging policies to protect your privacy. Admins regularly audit the platform to ensure no malicious actors compromise the trust and safety of the community.</p>
+      </div>
+
+      <div class="card">
+        <h3>👥 Community & Collaboration</h3>
+        <ul>
+          <li>Ask Me Anything (AMA) Sessions with industry experts and white-hat hackers.</li>
+          <li>Mentorship Opportunities for beginners who want guidance from experienced professionals.</li>
+          <li>Hackathons and Capture the Flag (CTF) events hosted monthly.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📱 Available Platforms</h3>
+        <ul>
+          <li>Web App (securechat.io)</li>
+          <li>Android & iOS Apps</li>
+          <li>CLI & Terminal Chat for Linux users</li>
+          <li>Optional TOR-accessible version for high privacy users</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🚫 What Secure Chat Is NOT</h3>
+        <ul>
+          <li>Not a place for illegal hacking discussions or black-hat activity.</li>
+          <li>No tolerance for harassment, doxxing, or sharing of unauthorized exploits.</li>
+          <li>Not a replacement for hands-on practice, but a community to support it.</li>
+        </ul>
       </div>
     </div>
   </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

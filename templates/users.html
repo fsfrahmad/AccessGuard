@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Users</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span><i class="fas fa-shield-alt"></i> SecureChat</span>
+    </div>
+    <div class="navbar-menu">
+      <a href="{{ url_for('dashboard') }}" class="nav-item"><i class="fas fa-home"></i> Home</a>
+      <a href="{{ url_for('secure_chat') }}" class="nav-item"><i class="fas fa-robot"></i> SecureChat</a>
+      <a href="{{ url_for('messages') }}" class="nav-item"><i class="fas fa-envelope"></i> Messages</a>
+      <a href="{{ url_for('users') }}" class="nav-item active"><i class="fas fa-users"></i> Users</a>
+      <a href="{{ url_for('profile') }}" class="nav-item"><i class="fas fa-user"></i> Profile</a>
+      <a href="{{ url_for('logout') }}" class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </nav>
+
+  <div class="users-container">
+    <div class="users-header">
+      <h2><i class="fas fa-users"></i> Users</h2>
+      <span class="user-count">All Users ({{ users|length }})</span>
+    </div>
+    <div class="users-actions">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search by name or email 📧" onkeyup="searchUsers()">
+        <button class="add-user-btn"><i class="fas fa-plus"></i> Add User</button>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterUsers('all')">All Users</button>
+        <button class="filter-btn" onclick="filterUsers('active')">Active</button>
+        <button class="filter-btn" onclick="filterUsers('inactive')">Inactive</button>
+        <button class="filter-btn" onclick="filterUsers('suspended')">Suspended</button>
+      </div>
+    </div>
+    <div class="users-list" id="users-list">
+      {% for user in users %}
+      <div class="user-card" data-name="{{ user.username }}" data-email="{{ user.email }}" data-status="{{ 'active' if user.verified else 'inactive' }}">
+        <div class="user-icon"><i class="fas fa-user-circle"></i></div>
+        <div class="user-info">
+          <h3>{{ user.username }}</h3>
+          <p>{{ user.email }}</p>
+          <p>Role: {{ user.role }}</p>
+        </div>
+        <div class="user-status">{{ 'Active' if user.verified else 'Inactive' }}</div>
+        <div class="user-actions">
+          <button class="action-btn edit-btn" onclick="openEditModal('{{ user._id }}', '{{ user.username }}', '{{ user.email }}', '{{ user.role }}', '{{ 'true' if user.verified else 'false' }}')"><i class="fas fa-edit"></i></button>
+          <form action="{{ url_for('delete_user', user_id=user._id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+            <button type="submit" class="action-btn"><i class="fas fa-trash"></i></button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Edit User Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">×</span>
+      <h2>Edit User</h2>
+      <form id="editUserForm" method="POST" action="{{ url_for('edit_user') }}">
+        <input type="hidden" id="editUserId" name="user_id">
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Username</label>
+          <p id="editUsername" class="non-editable"></p>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <p id="editEmail" class="non-editable"></p>
+        </div>
+        <div class="form-group">
+          <label for="editRole"><i class="fas fa-user-shield"></i> Role</label>
+          <select id="editRole" name="role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editVerified"><i class="fas fa-check-circle"></i> Status</label>
+          <select id="editVerified" name="verified" required>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
+          <button type="button" class="cancel-btn" onclick="closeEditModal()"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function searchUsers() {
+      let input = document.getElementById('search-input').value.toLowerCase();
+      let cards = document.getElementsByClassName('user-card');
+      for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].dataset.name.toLowerCase();
+        let email = cards[i].dataset.email.toLowerCase();
+        if (name.includes(input) || email.includes(input)) {
+          cards[i].style.display = '';
+        } else {
+          cards[i].style.display = 'none';
+        }
+      }
+    }
+
+    function filterUsers(status) {
+      let cards = document.getElementsByClassName('user-card');
+      let buttons = document.getElementsByClassName('filter-btn');
+      for (let btn of buttons) btn.classList.remove('active');
+      document.querySelector(`.filter-btn[onclick="filterUsers('${status}')"]`).classList.add('active');
+
+      for (let i = 0; i < cards.length; i++) {
+        let cardStatus = cards[i].dataset.status;
+        if (status === 'all' || cardStatus === status) {
+          cards[i].style.display = '';
+        } else {
+          cards[i].style.display = 'none';
+        }
+      }
+    }
+
+    function openEditModal(userId, username, email, role, verified) {
+      document.getElementById('editUserId').value = userId;
+      document.getElementById('editUsername').textContent = username;
+      document.getElementById('editEmail').textContent = email;
+      document.getElementById('editRole').value = role;
+      document.getElementById('editVerified').value = verified;
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      let modal = document.getElementById('editModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
